@@ -1,6 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -13,7 +14,13 @@ module.exports = {
     new Dotenv({
       systemvars: true
     }),
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin('styles.css'),
+    new webpack.ProvidePlugin({
+      "$": 'jquery',
+      "jQuery": 'jquery',
+      'window.jQuery': 'jquery',
+      "Popper": ['popper.js', 'default']
+    })
   ],
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
